@@ -29,8 +29,10 @@ const Layout = ({ children }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 1280,
+          textAlign: 'center',
           padding: `0 1.0875rem 1.45rem`,
+          justifyContent: 'center',
         }}
       >
         <main>{children}</main>
