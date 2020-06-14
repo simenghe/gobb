@@ -1,40 +1,43 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-import { XYPlot, LineSeries, VerticalBarSeries, MarkSeries } from 'react-vis';
-const data = [
-  { x: 0, y: 8 },
-  { x: 1, y: 5 },
-  { x: 2, y: 4 },
-  { x: 3, y: 9 },
-  { x: 4, y: 1 },
-  { x: 5, y: 7 },
-  { x: 6, y: 6 },
-  { x: 7, y: 3 },
-  { x: 8, y: 2 },
-  { x: 9, y: 0 }
-];
-const IndexPage = () => (
+import "../components/layout.css"
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+const IndexPage = ({ pageContext: { hltvdata } }) => (
   <Layout>
     <SEO title="Home" />
-    <h1>HLTV data!</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <XYPlot height={200} width={200}>
-      <VerticalBarSeries data={data} />
-    </XYPlot>
-    <XYPlot height={200} width={200}>
-      <LineSeries data={data} />
-    </XYPlot>
-    <XYPlot height={200} width={200}>
-      <MarkSeries data={data} />
-    </XYPlot>
+    <h1>My man{hltvdata.data}</h1>
+    {/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem`,justifyContent: `center` }}>
+    </div> */}
+    <VictoryChart
+      domainPadding={{ x: 40 }}
+    >
+      <VictoryBar
+        data={[
+          { experiment: "trial 1", expected: 3.75, actual: 3.21 },
+          { experiment: "trial 2", expected: 3.75, actual: 3.38 },
+          { experiment: "trial 3", expected: 3.75, actual: 2.05 },
+          { experiment: "trial 4", expected: 3.75, actual: 3.71 }
+        ]}
+        x="experiment"
+        y={(d) => (d.actual / d.expected) * 100}
+      />
+      <VictoryAxis
+        label="experiment"
+        style={{
+          axisLabel: { padding: 30 }
+        }}
+      />
+      <VictoryAxis dependentAxis
+        label="percent yield"
+        style={{
+          axisLabel: { padding: 40 }
+        }}
+      />
+    </VictoryChart>
     <Link to="/page-2/">Go to page 2</Link> <br />
   </Layout>
 )

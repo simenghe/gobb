@@ -47,6 +47,15 @@ a:active,
 a:hover {
   outline-width: 0;
 }
+.container {
+  height: 300px;
+  width: 300px;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
